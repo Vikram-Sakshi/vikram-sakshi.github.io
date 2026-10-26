@@ -1838,3 +1838,54 @@ body, .btn, .cal-menu, .chip { font-variant-numeric: lining-nums; font-feature-s
 
 /* no dashed ring around the music button */
 .music-btn .ring { display: none !important; }
+
+/* =========================================================
+   Opening: bridal veil (ghunghat) lift
+   ========================================================= */
+.vl { position: fixed; inset: 0; z-index: 80; overflow: hidden; cursor: pointer; }
+.vl-glow { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(255,214,150,.18), rgba(40,6,14,.55)); pointer-events: none; }
+.vl-cloth {
+  position: absolute; left: -2%; right: -2%; top: 0; height: calc(100svh - 26px);
+  transform-origin: 50% 0%;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 20%, rgba(255,170,170,.22), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 75% 70%, rgba(255,120,120,.14), transparent 70%),
+    repeating-linear-gradient(100deg, rgba(255,255,255,.035) 0 2px, transparent 2px 9px),
+    linear-gradient(180deg, rgba(176,20,44,.9) 0%, rgba(150,12,36,.92) 60%, rgba(128,8,30,.94) 100%);
+  -webkit-backdrop-filter: blur(6px) saturate(1.2); backdrop-filter: blur(6px) saturate(1.2);
+  box-shadow: 0 20px 40px rgba(40,4,12,.55);
+  display: grid; place-items: center;
+}
+.vl-buti { position: absolute; inset: 0; opacity: .6; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 70 70'%3E%3Cg fill='%23F1D27A'%3E%3Cpath d='M17 14c4-6 10-4 9 2-1 5-7 6-9 11-2-5 0-9 0-13z' opacity='.75'/%3E%3Ccircle cx='52' cy='50' r='2.2'/%3E%3Ccircle cx='52' cy='44' r='1'/%3E%3Ccircle cx='58' cy='50' r='1'/%3E%3Ccircle cx='46' cy='50' r='1'/%3E%3Ccircle cx='52' cy='56' r='1'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 70px 70px; }
+.vl-shine { position: absolute; top: 0; bottom: 0; left: 0; width: 35%; background: linear-gradient(100deg, transparent, rgba(255,230,190,.16), transparent); pointer-events: none; }
+.vl-zari { position: absolute; pointer-events: none;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%237A4E10' stroke-width='1.2'%3E%3Cpath d='M20 4 L36 20 L20 36 L4 20 Z'/%3E%3Ccircle cx='20' cy='20' r='5'/%3E%3C/g%3E%3C/svg%3E") center / 40px 40px repeat,
+    linear-gradient(90deg, #8E6420, #F6E7B5 30%, #D7B46A 50%, #F6E7B5 70%, #8E6420);
+  box-shadow: inset 0 0 0 2px rgba(122,78,16,.5);
+}
+.vl-zari.side { top: 0; bottom: 0; width: 26px; }
+.vl-zari.side.l { left: 2%; } .vl-zari.side.r { right: 2%; }
+.vl-zari.hem { left: 0; right: 0; bottom: 0; height: 40px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%237A4E10' stroke-width='1.2'%3E%3Cpath d='M20 4 L36 20 L20 36 L4 20 Z'/%3E%3Ccircle cx='20' cy='20' r='5'/%3E%3C/g%3E%3C/svg%3E") center / 40px 40px repeat-x,
+    linear-gradient(180deg, #8E6420, #F6E7B5 30%, #D7B46A 50%, #F6E7B5 70%, #8E6420); }
+.vl-tassels { position: absolute; left: 3%; right: 3%; bottom: -30px; height: 34px; display: flex; justify-content: space-between; pointer-events: none; }
+.vl-tassel { position: relative; display: block; width: 12px; height: 34px; transform-origin: 50% 0; }
+.vl-tassel::before { content: ""; position: absolute; left: 50%; top: 0; width: 1.5px; height: 14px; translate: -50% 0; background: #D7B46A; }
+.vl-tassel::after { content: ""; position: absolute; left: 0; top: 12px; width: 12px; height: 20px; border-radius: 50% 50% 40% 40%; background: radial-gradient(circle at 45% 30%, #FFE7A8, #D7B46A 40%, #B3122E 70%); box-shadow: 0 4px 6px rgba(0,0,0,.35); }
+.vl-in { position: relative; z-index: 2; display: grid; justify-items: center; gap: clamp(4px, 1.2svh, 10px); text-align: center; padding: 40px 48px; max-width: 640px; color: #F6DFA0; }
+.vl-ganesh { width: clamp(64px, 11svh, 96px); filter: drop-shadow(0 6px 18px rgba(0,0,0,.45)); }
+.vl-bless { font-family: var(--f-display); font-size: 1rem; color: #F6DFA0; }
+.vl-sv { width: min(72vw, 380px); aspect-ratio: 900 / 324; background: linear-gradient(115deg, #C99A44, #FFF0C2 45%, #E4C77A 60%, #B8893A);
+  -webkit-mask: url("/img/shubhvivah.png") center / contain no-repeat; mask: url("/img/shubhvivah.png") center / contain no-repeat; filter: drop-shadow(0 3px 8px rgba(60,4,14,.6)); }
+.vl-names { font-family: var(--f-play); font-size: clamp(1.35rem, 4.6vw, 2.2rem); color: #FFF4D6; line-height: 1.35; display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 .35em; text-shadow: 0 2px 10px rgba(60,4,14,.6); }
+.vl-names i { font-style: normal; font-family: var(--f-script); color: #F6DFA0; font-size: .7em; }
+.vl-date { font-family: var(--f-ui); font-size: 1rem; color: #F6DFA0; }
+.vl-rule { width: 54%; height: 1px; background: linear-gradient(90deg, transparent, #F6DFA0, transparent); margin: 4px 0; }
+.vl-for { font-family: var(--f-ui); font-size: .9rem; color: rgba(246,223,160,.85); }
+.vl-guest { font-family: var(--f-script); font-size: clamp(1.5rem, 4.4vw, 2.1rem); color: #FFF4D6; line-height: 1.3; }
+.vl-btn { margin-top: 10px; padding: 12px 28px; border: 0; border-radius: 999px; font-family: var(--f-ui); font-size: 1.02rem; font-weight: 500; color: #7A0F22;
+  background: linear-gradient(115deg, #C99A44, #FFF0C2 50%, #D7B46A); box-shadow: 0 12px 26px -10px rgba(40,4,12,.8); animation: icPulse 2s ease-in-out infinite; }
+@media (max-width: 560px) { .vl-zari.side { width: 16px; } .vl-in { padding: 30px 34px; } }
