@@ -101,7 +101,7 @@ export function Invitation() {
           <>
             <audio ref={audio} src={music} loop preload="auto" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} />
             <motion.button className={`music-btn${playing ? " playing" : " muted"}`} type="button"
-              aria-label={playing ? "Pause music" : "Play music"} aria-pressed={playing} title={playing ? "Music on — tap to pause" : "Music off — tap to play"}
+              aria-label={playing ? "संगीत रोकें" : "संगीत चलाएँ"} aria-pressed={playing} title={playing ? "संगीत चल रहा है — रोकने के लिए टैप करें" : "संगीत बंद है — चलाने के लिए टैप करें"}
               onClick={toggleMusic} whileTap={{ scale: 0.9 }} initial={{ opacity: 0, scale: 0.5 }} animate={opened ? { opacity: 1, scale: 1 } : {}}>
               <span className="ring" />
               <svg viewBox="0 0 24 24" aria-hidden="true" className="mb-icon">
