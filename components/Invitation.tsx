@@ -68,7 +68,7 @@ export function Invitation() {
     a.volume = 0;
     a.play().then(() => {
       let v = 0;
-      const id = setInterval(() => { v = Math.min(0.55, v + 0.03); a.volume = v; if (v >= 0.55) clearInterval(id); }, 120);
+      const id = setInterval(() => { v = Math.min(0.4, v + 0.015); a.volume = v; if (v >= 0.4) clearInterval(id); }, 120);
     }).catch(() => {});
   };
 

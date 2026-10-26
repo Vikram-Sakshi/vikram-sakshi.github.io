@@ -9,8 +9,8 @@ export const WEDDING = {
     // Countdown target: the wedding day from the card (India time).
     countdownTo: "2026-11-24T00:00:00+05:30",
     // Put an MP3/M4A in public/ and set its path here to add background music. "" = no music.
-    // "Jab Se Tumko Dekha – Romantic Hindi Love Song" by RahulSapkal (Pixabay, free under the Pixabay Content License)
-    music: "/music-hindi.m4a",
+    // "Indian Wedding" by MondaMusic (Pixabay, free under the Pixabay Content License) — soft instrumental
+    music: "/music-wedding.m4a",
   },
 
   couple: {
