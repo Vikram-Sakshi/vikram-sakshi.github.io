@@ -6,22 +6,37 @@ import { useGSAP } from "@gsap/react";
 import { WEDDING } from "@/lib/content";
 
 const { text: T, couple: C } = WEDDING;
-const TASSELS = 15;
 
-/** Ghunghat: a sheer red bridal chunari with gold zari borders covers the screen, the sunrise
- *  glowing faintly through it. Tapping lifts the veil — it curls up from the hem and floats away. */
+/** A royal-blue, gold-foil invitation card standing over the blurred painting.
+ *  It tilts in 3D with the pointer; tapping flips it over and it opens into the site. */
 export function Intro({ guest, autoOpen, onTap, onOpen, onDone }: { guest: string; autoOpen: boolean; onTap?: () => void; onOpen: () => void; onDone: () => void }) {
   const root = useRef<HTMLDivElement>(null);
   const busy = useRef(false);
 
   const { contextSafe } = useGSAP(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    gsap.from(".vl-cloth", { yPercent: -100, duration: 1.6, ease: "power3.out", delay: 2.1 });
-    gsap.from(".vl-in > *", { y: 22, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out", delay: 2.8 });
-    // the chunari breathes and sways a little; tassels swing out of step
-    gsap.to(".vl-cloth", { skewX: 0.8, scaleY: 1.008, duration: 3.2, yoyo: true, repeat: -1, ease: "sine.inOut", transformOrigin: "50% 0%" });
-    gsap.to(".vl-tassel", { rotate: (i: number) => (i % 2 ? 7 : -7), duration: (i: number) => 1.6 + (i % 4) * 0.25, yoyo: true, repeat: -1, ease: "sine.inOut" });
-    gsap.fromTo(".vl-shine", { xPercent: -120 }, { xPercent: 220, duration: 3.2, repeat: -1, repeatDelay: 1.8, ease: "power2.inOut", delay: 3.4 });
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    gsap.from(".ic-card", { y: 120, rotateX: 40, opacity: 0, duration: 1.8, ease: "expo.out", delay: 2.2 });
+    gsap.from(".ic-front > *", { y: 18, opacity: 0, duration: 1, stagger: 0.09, ease: "power3.out", delay: 2.7 });
+    gsap.fromTo(".ic-shine", { xPercent: -160 }, { xPercent: 160, duration: 2.6, ease: "power2.inOut", repeat: -1, repeatDelay: 2.2, delay: 3.4 });
+    gsap.to(".ic-float", { y: -10, duration: 3, yoyo: true, repeat: -1, ease: "sine.inOut" });
+
+    // 3D tilt following the pointer (or the phone's tilt)
+    const rx = gsap.quickTo(".ic-tilt", "rotateX", { duration: 0.8, ease: "power3" });
+    const ry = gsap.quickTo(".ic-tilt", "rotateY", { duration: 0.8, ease: "power3" });
+    const onMove = (e: PointerEvent) => {
+      if (busy.current) return;
+      ry((e.clientX / innerWidth - 0.5) * 22);
+      rx((e.clientY / innerHeight - 0.5) * -16);
+    };
+    const onTilt = (e: DeviceOrientationEvent) => {
+      if (busy.current || e.gamma == null || e.beta == null) return;
+      ry(Math.max(-18, Math.min(18, e.gamma * 0.6)));
+      rx(Math.max(-14, Math.min(14, (e.beta - 45) * -0.4)));
+    };
+    addEventListener("pointermove", onMove);
+    addEventListener("deviceorientation", onTilt);
+    return () => { removeEventListener("pointermove", onMove); removeEventListener("deviceorientation", onTilt); };
   }, { scope: root });
 
   const open = contextSafe(() => {
@@ -31,44 +46,54 @@ export function Intro({ guest, autoOpen, onTap, onOpen, onDone }: { guest: strin
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       onOpen(); gsap.to(root.current, { opacity: 0, duration: 0.3, onComplete: onDone }); return;
     }
-    gsap.killTweensOf(".vl-cloth");
+    gsap.killTweensOf(".ic-float");
     const tl = gsap.timeline({ onComplete: onDone });
-    tl.to(".vl-in > *", { opacity: 0, y: -14, duration: 0.45, stagger: 0.04, ease: "power2.in" })
-      // the hem curls up first, then the whole chunari lifts and floats off the top
-      .to(".vl-cloth", { borderBottomLeftRadius: "50% 30%", borderBottomRightRadius: "50% 30%", skewX: -4, duration: 0.7, ease: "power2.inOut" }, 0.15)
-      .to(".vl-tassel", { rotate: (i: number) => (i < TASSELS / 2 ? 30 : -30), duration: 0.6, ease: "power2.out" }, 0.15)
-      .to(".vl-cloth", { yPercent: -112, skewX: 6, rotate: -2, duration: 1.4, ease: "power3.in" }, 0.6)
-      .to(".vl-glow", { opacity: 0, duration: 1.2 }, 0.8)
-      .add(onOpen, 1.1)
-      .to(root.current, { opacity: 0, duration: 0.35 }, 1.85);
+    tl.to(".ic-tilt", { rotateX: 0, rotateY: 0, duration: 0.3, ease: "power2.out" })
+      .to(".ic-flip", { rotateY: 180, duration: 1.1, ease: "power3.inOut" })
+      .fromTo(".ic-back-glow", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1.2, duration: 0.8, ease: "power2.out" }, "-=0.4")
+      .add(onOpen, "+=0.2")
+      .to(".ic-card", { scale: 7, opacity: 0, duration: 1.1, ease: "power3.in" }, "+=0.05")
+      .to(".ic-bg", { opacity: 0, filter: "blur(0px)", duration: 1 }, "<0.2")
+      .to(root.current, { opacity: 0, duration: 0.4 }, "-=0.3");
   });
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { if (autoOpen) { busy.current = true; onOpen(); onDone(); } }, [autoOpen]);
 
   return (
-    <div className="vl" ref={root} onClick={open}>
-      <div className="vl-glow" aria-hidden="true" />
-      <div className="vl-cloth">
-        <span className="vl-buti" aria-hidden="true" />
-        <span className="vl-shine" aria-hidden="true" />
-        <span className="vl-zari side l" aria-hidden="true" /><span className="vl-zari side r" aria-hidden="true" />
-        <span className="vl-zari hem" aria-hidden="true" />
-        <div className="vl-tassels" aria-hidden="true">
-          {Array.from({ length: TASSELS }, (_, i) => <i key={i} className="vl-tassel" />)}
-        </div>
+    <div className="ic" ref={root} onClick={open}>
+      <div className="ic-bg" aria-hidden="true" />
+      <div className="ic-vignette" aria-hidden="true" />
 
-        <div className="vl-in">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="vl-ganesh" src="/img/ganesh.webp" alt="" />
-          <p className="vl-bless">{T.blessing}</p>
-          <span className="vl-sv" aria-hidden="true" />
-          <p className="vl-names">{C.groomPrefix} {C.groomFull}<i>{C.withWord}</i>{C.bridePrefix} {C.brideFull}</p>
-          <p className="vl-date">{T.heroDate.weekday} · {T.countdownSub.replace("मंगलवार ", "")}</p>
-          <span className="vl-rule" aria-hidden="true" />
-          <p className="vl-for">{T.envelopeFor}</p>
-          <p className="vl-guest">{guest || T.guestDefault}</p>
-          <button type="button" className="vl-btn" onClick={e => { e.stopPropagation(); open(); }}>{T.tapToOpen}</button>
+      <div className="ic-card">
+        <div className="ic-float">
+          <div className="ic-tilt">
+            <button type="button" className="ic-flip" aria-label={T.tapToOpen} onClick={e => { e.stopPropagation(); open(); }}>
+              {/* front */}
+              <span className="ic-face ic-front">
+                <span className="ic-shine" aria-hidden="true" />
+                <span className="ic-frame" aria-hidden="true" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="ic-ganesh" src="/img/ganesh.webp" alt="" />
+                <span className="ic-bless">{T.blessing}</span>
+                <span className="ic-sv" aria-hidden="true" />
+                <span className="ic-names">{C.groom}<i>{C.withWord}</i>{C.bride}</span>
+                <span className="ic-date">{T.heroDate.weekday} · {T.countdownSub.replace("मंगलवार ", "")}</span>
+                <span className="ic-rule" aria-hidden="true" />
+                <span className="ic-for">{T.envelopeFor}</span>
+                <span className="ic-guest">{guest || T.guestDefault}</span>
+                <span className="ic-cta">{T.tapToOpen} <b aria-hidden="true">→</b></span>
+              </span>
+              {/* back */}
+              <span className="ic-face ic-back" aria-hidden="true">
+                <span className="ic-back-glow" />
+                <span className="ic-frame" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/img/ganesh.webp" alt="" />
+                <span className="ic-back-t">{T.sanskar}</span>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
