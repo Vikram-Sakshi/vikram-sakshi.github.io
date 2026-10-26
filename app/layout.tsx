@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "विक्रम संग साक्षी · शुभविवाह · 24-11-2026",
   description: "चि. विक्रम दुबे संग आयु. कु. साक्षी मिश्रा का पाणिग्रहण संस्कार · मंगलवार दि. 24-11-2026 · नालासोपारा (पूर्व)",
-  icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }, { url: "/favicon-64.png", sizes: "64x64", type: "image/png" }], apple: "/apple-touch-icon.png" },
+  icons: { icon: [{ url: "/icon-vs.svg", type: "image/svg+xml" }, { url: "/icon-vs-64.png", sizes: "64x64", type: "image/png" }], apple: "/apple-touch-icon.png" },
   openGraph: {
     type: "website",
     title: "विक्रम संग साक्षी · शुभविवाह",
