@@ -1832,3 +1832,6 @@ body, .btn, .cal-menu, .chip { font-variant-numeric: lining-nums; font-feature-s
   display: flex !important; flex-direction: column; align-items: center; justify-content: center; padding: 90px 20px 40px; }
 .hx-copy > * { max-width: 640px; }
 @media (max-aspect-ratio: 1/1) { .hx-copy { justify-content: flex-start; padding-top: clamp(80px, 11vh, 110px) !important; } }
+
+/* remove the dashed spinning ring around the couple (looked like a stray border) */
+.w-art::before { display: none !important; }
