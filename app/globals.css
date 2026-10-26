@@ -1835,3 +1835,6 @@ body, .btn, .cal-menu, .chip { font-variant-numeric: lining-nums; font-feature-s
 
 /* remove the dashed spinning ring around the couple (looked like a stray border) */
 .w-art::before { display: none !important; }
+
+/* no dashed ring around the music button */
+.music-btn .ring { display: none !important; }
