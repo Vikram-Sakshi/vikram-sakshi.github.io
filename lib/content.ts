@@ -1,7 +1,7 @@
 /*
   All wedding text lives here. Edit this file to change anything guests see.
   Leave a field as "" (empty) or [] to hide it on the site.
-  Hindi wording is taken as-is from the printed card (PDF pages 1–3).
+  Hindi wording is taken as-is from the printed card (PDF pages 1–4).
   A few short labels (buttons, section names) are not on the card; they are marked "UI".
 */
 export const WEDDING = {
@@ -86,8 +86,8 @@ export const WEDDING = {
         "सुपौत्र - श्रीमती स्व. इसरावतीदेवी एवं स्व. श्री. सीताराम दुबे",
         "सुपुत्र – श्रीमती सुनीता एवं श्री. विजय एस. दुबे",
       ],
-      whenTitle: "शुभ तिलकोत्सव",
-      when: ["रविवार, दि. 22-11-2026 को", "शाम 4 बजे से रात्री 9 बजे तक"],
+      whenTitle: "शुभ तिलकोत्सव एवं इंगेजमेंट",
+      when: ["रविवार, दि. 22-11-2026 को", "शाम 3 बजे से रात्री 10 बजे तक"],
       whereTitle: "शुभ तिलकोत्सव स्थल",
       where: ["संस्कृति रोज, नादब्रम्हा रोड,", "कैपिटल मॉल के पास,", "नालासोपारा (पूर्व) : 401209."],
       map: "Sanskruti Rose, Nadbramha Road, near Capital Mall, Nalasopara East 401209",
@@ -96,13 +96,13 @@ export const WEDDING = {
     /* ---- Baraat (note from PDF page 2) ---- */
     baraatEyebrow: "बारात", // UI
     baraatTitle: "बारात प्रस्थान", // UI
-    // The card leaves the time blank. Put it here (e.g. "6") and it fills the gap everywhere.
-    baraatHour: "",
+    // Baraat leaves at 5 pm (card page 2).
+    baraatHour: "5",
     baraatNote: ["नोट : बारात हमारे निवास स्थान से शाम", "बजे प्रस्थान करेगी।"],
     baraatHint: "ढोल बजाएँ, आसमान पर टैप करें, बारात को खींचें", // UI
     dholBtn: "ढोल बजाएँ", // UI
     ticketDate: "दिनांक", ticketTime: "समय", ticketFrom: "प्रस्थान", ticketTo: "आगमन", // UI
-    baraatTime: "मंगलवार, दि. 24-11-2026",
+    baraatTime: "मंगलवार, दि. 24-11-2026 · शाम 5 बजे प्रस्थान",
     baraatFrom: "निवास स्थान",
     baraatFromSub: "सी-703, संस्कृति रोज, कैपिटल माल के पास",
     baraatTo: "नव दुर्गा ग्राउण्ड",
@@ -141,7 +141,7 @@ export const WEDDING = {
     mithiTitle: "बाल मनुहार", // UI (common heading on Hindi cards)
     mithiText: "मेरे मामा की शादी में आप सभी जरुर से जरुर आना है ....",
     mithiFrom: "",
-    mithiNames: "गितिका, प्रांजली, सरन्या, मान्या, इशिता, वृन्दा, आरवी",
+    mithiNames: "गीतिका, प्रांजली, शरन्या, मान्या, इशिता, वृन्दा, आरवी",
     footer: "।। ॐ श्री गणेशाय नमः ।।",
     footerCols: { events: "कार्यक्रम", contact: "संपर्क", explore: "देखें" }, // UI
     nav: { home: "मुख्य", invitation: "निमंत्रण", tilak: "तिलक", baraat: "बारात", celebrations: "कार्यक्रम", family: "परिवार", call: "कॉल" }, // UI
@@ -150,10 +150,10 @@ export const WEDDING = {
   // Ceremonies from the card. Times are India time; the card gives a time only for the tilak.
   events: [
     {
-      id: "tilak", icon: "diya", name: "शुभ तिलकोत्सव", note: "",
-      day: "रविवार", date: "दि. 22-11-2026", dd: "22", mon: "नव.", short: "22 नव.", time: "शाम 4 बजे से रात्री 9 बजे तक",
+      id: "tilak", icon: "diya", name: "शुभ तिलकोत्सव एवं इंगेजमेंट", note: "",
+      day: "रविवार", date: "दि. 22-11-2026", dd: "22", mon: "नव.", short: "22 नव.", time: "शाम 3 बजे से रात्री 10 बजे तक",
       venue: "संस्कृति रोज, नादब्रम्हा रोड, कैपिटल मॉल के पास, नालासोपारा (पूर्व)",
-      start: "2026-11-22T16:00:00+05:30", end: "2026-11-22T21:00:00+05:30",
+      start: "2026-11-22T15:00:00+05:30", end: "2026-11-22T22:00:00+05:30",
       mapQuery: "Sanskruti Rose, Nadbramha Road, near Capital Mall, Nalasopara East 401209",
     },
     {
@@ -179,25 +179,25 @@ export const WEDDING = {
   family: [
     {
       title: "दर्शनाभिलाषी", tab: "दर्शनाभिलाषी", sub: "",
-      names: ["श्री. विक्रम जेटली", "श्री. अमरीश उपाध्याय", "श्री. आनन्द दुबे", "श्री. शत्रुघ्न दुबे", "श्री. प्रफुल्ल शुक्ल", "श्री. अमित गोडसे"],
+      names: ["श्री. विक्रम जेटली", "श्री. अमरीश उपाध्याय", "श्री. आनन्द दुबे", "श्री. शत्रुघ्न दुबे", "श्री. प्रफुल्ल शुक्ला", "श्री. अमित गोडसे"],
       extra: [] as string[], closing: "",
     },
     {
-      title: "विनीत", tab: "विनीत", sub: "मो. : 9867629522",
+      title: "विनीत", tab: "विनीत", sub: "पराग (देवा) मो. : 8779744163",
       names: ["श्री. दूधनाथ दुबे", "श्री. रामचन्द्र दुबे", "श्री. अशोक दुबे", "श्री. धर्मेन्द्र दुबे", "श्री. भावेश दुबे"],
       extra: [] as string[], closing: "",
     },
     {
       title: "स्वागताकांक्षी", tab: "स्वागताकांक्षी", sub: "",
       names: [] as string[],
-      extra: ["देवेश, गौरव, विकास, ध्रानील, जयनील, चैतन्य, वेदान्त, यश, श्लोक, नीवान, राघव"],
+      extra: ["देवेश, गौरव, विकास, पराग (देवा), ध्वनिल, जयनील, चैतन्य, वेदान्त, यश, श्लोक, नीवान, राघव, अंकिता, प्रीती"],
       closing: "एवं समस्त दुबे परिवार",
     },
   ],
 
   contacts: [
     { name: "निवास स्थान", phone: "7977274663" },
-    { name: "विनीत", phone: "9867629522" },
+    { name: "पराग (देवा)", phone: "8779744163" },
   ],
 };
 
